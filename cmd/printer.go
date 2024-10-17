@@ -24,9 +24,7 @@ var printerCmd = &cobra.Command{
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		formatter.NameFormatter(validated, "All")
-		fmt.Println(validated)
-		fmt.Println(args)
+		fmt.Println(formatter.NameFormatter("All", validated))
 	},
 }
 
@@ -37,7 +35,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// printerCmd.PersistentFlags().String("foo", "", "A help for foo")
+	//printerCmd.PersistentFlags().String("reverse", "", "print ")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:

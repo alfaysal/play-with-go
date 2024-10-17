@@ -1,9 +1,9 @@
 package formatter
 
-import "fmt"
+import (
+	"strings"
+)
 
-func NameFormatter(name ...string) string {
-	fmt.Println("Call from name formater")
-	fmt.Println(name)
-	return "Al faysal"
+func NameFormatter(names ...string) string {
+	return strings.Join(names, ", ")
 }
