@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -19,17 +20,7 @@ var subtractCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(subtractCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// subtractCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// subtractCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	arithmeticCmd.AddCommand(subtractCmd)
 	subtractCmd.Flags().BoolP("invert-sign", "i", false, "inverts the sign of the result.")
 }
 
@@ -43,6 +34,12 @@ func subCommandRunE(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("you provide a value that was not an integer: %s", v)
 		}
 		values[i] = vAsInt
+	}
+
+	showInputs, _ := cmd.Flags().GetBool("show-inputs")
+
+	if showInputs {
+		fmt.Fprintln(cmd.OutOrStdout(), "%s\n", strings.Join(args, "-"))
 	}
 
 	// get the invert sign flag

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"strconv"
+	"strings"
 )
 
 // sumCmd represents the sum command
@@ -20,7 +21,7 @@ var sumCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(sumCmd)
+	arithmeticCmd.AddCommand(sumCmd)
 
 	// Here you will define your flags and configuration settings.
 
@@ -44,13 +45,19 @@ func sumCommandRunE(cmd *cobra.Command, args []string) error {
 		}
 		values[i] = vAsInt
 	}
+
+	showInputs, _ := cmd.Flags().GetBool("show-inputs")
+
+	if showInputs {
+		fmt.Fprintln(cmd.OutOrStdout(), "%s\n", strings.Join(args, "+"))
+	}
+
 	fmt.Println(getSum(values...))
 
 	return nil
 }
 
 func getSum(values ...int) int {
-	fmt.Println(values)
 	x := 0
 	for _, v := range values {
 		x += v
