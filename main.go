@@ -1,9 +1,7 @@
 package main
 
-import (
-	"fmt"
-)
+import "github.com/alfaysal/play-with-go/cmd"
 
 func main() {
-	fmt.Println("Hello World")
+	cmd.Execute()
 }
